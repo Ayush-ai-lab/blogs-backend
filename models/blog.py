@@ -1,6 +1,6 @@
 from sqlalchemy import Column,Integer, String, DateTime,Text 
 from core.database import Base 
-
+from datetime import datetime
 class Blog(Base):
     __tablename__ = "blogs"
 

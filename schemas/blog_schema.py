@@ -4,4 +4,5 @@ class BlogSchema(BaseModel):
     title : str
     slug : str 
     short_description: str
+    description : str
     
