@@ -1,33 +1,40 @@
 from fastapi import APIRouter
 from schemas.blog_schema import BlogSchema
-from services.blog_service import create_blog, get_all_blog, get_single_blog, upload_blog, delete_blog  
-
+from services.blog_service import create_blog, get_all_blog, get_single_blog, update_blog, delete_blog  
+from sqlalchemy.orm import Session
+from core.database import get_db
+from fastapi import Depends
 
 router = APIRouter( 
     prefix="/blogs",
     tags=["Blogs"])
 
 @router.post("/create-blog")
-def CreateBlog(blog: BlogSchema):
+def CreateBlog(blog: BlogSchema,
+    db: Session = Depends(get_db)):
     return  create_blog(blog)
 
 
 @router.get("/")
-def GetAllBlog():
+def GetAllBlog(
+    db: Session = Depends(get_db)):
     return get_all_blog()
 
 
 @router.get("/single-blog/{id}")
-def GetSingleBlog(id: int):
+def GetSingleBlog(id: int,
+    db: Session = Depends(get_db)):
     return get_single_blog(id)
 
 
 
 @router.put("/update-blog/{id}")
-def UpdateBlog(id: int  , blog:BlogSchema):
-    return upload_blog(id,blog)
+def UpdateBlog(id: int  , blog:BlogSchema,
+    db: Session = Depends(get_db)):
+    return update_blog(id,blog)
 
 @router.delete("/delete-blog/{id}")
-def DeleteBlog(id: int):
+def DeleteBlog(id: int,
+    db: Session = Depends(get_db)s):
     return delete_blog(id)
 

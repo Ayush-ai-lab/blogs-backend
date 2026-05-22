@@ -7,6 +7,8 @@ router = APIRouter(
 
 @router.post("/register")
 def Register(user: RegisterSchema):
+        
+
         return {
             "message": "User create successfully",
             "data": user
