@@ -20,7 +20,7 @@ def register(user, db):
         "data" : new_user
     }
 
-def login(user, id):
+def login(user, id,db):
     db_user = db.query(User).filter(
         User.email == user.email
     ).first()
@@ -56,7 +56,6 @@ def login(user, id):
         "message": "User login successfully",
         "access_token" : access_token
     }
-
 
 def user_update(updated_user,db,id):
     old_user = db.query(User).filter(User.id == id).first()
