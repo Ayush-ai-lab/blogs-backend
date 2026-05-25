@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from schemas.user_schema import RegisterSchema, LoginSchema
-from services.user_service import register, update_user, get_all_user, get_single_user, delete_user, login
+from services.user_service import register, user_update, get_all_user, get_single_user, user_delete, login
 from sqlalchemy.orm import Session
 from core.database import get_db
 from fastapi import Depends
@@ -19,7 +19,7 @@ def Login(user: LoginSchema,db: Session = Depends(get_db)):
 
 @router.put("/update-user/{id}")
 def UpdateUser(id: int, user: RegisterSchema, db: Session = Depends(get_db)):
-        return update_user(id, user, db)
+        return user_update(id, user, db)
 
 @router.get("/")
 def GetUsers(db: Session = Depends(get_db)):
@@ -31,4 +31,4 @@ def GetSingleUser(id: int, db: Session = Depends(get_db)):
 
 @router.delete("/delete-user/{id}")
 def DeleteUser(id:int, db: Session = Depends(get_db)):
-        return delete_user(id, db)
+        return user_delete(id, db)

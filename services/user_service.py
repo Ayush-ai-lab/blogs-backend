@@ -20,7 +20,7 @@ def register(user, db):
         "data" : new_user
     }
 
-def login(user, id,db):
+def login(user,db):
     db_user = db.query(User).filter(
         User.email == user.email
     ).first()
@@ -57,17 +57,17 @@ def login(user, id,db):
         "access_token" : access_token
     }
 
-def user_update(updated_user,db,id):
+def user_update(user,db,id):
     old_user = db.query(User).filter(User.id == id).first()
     if not old_user:
         return {
             "message" : "No User Found" 
         }
     
-    old_user.name = updated_user.name
-    old_user.email = updated_user.email
+    old_user.name = user.name
+    old_user.email = user.email
     old_user.password = hash_password(
-    updated_user.password
+    user.password
 )
 
     db.commit()

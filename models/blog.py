@@ -11,6 +11,7 @@ class Blog(Base):
     short_description = Column(String(255))
     description = Column(Text)
     create_at = Column(DateTime,default=datetime.utcnow)
+    image = Column(String(255), nullable=True)
     user_id = Column(
         Integer,
         ForeignKey("users.id")
